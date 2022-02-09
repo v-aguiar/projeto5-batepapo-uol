@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="./styles/reset.css">
+  <link rel="stylesheet" href="./styles/style.css">
+
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <title>Bate-Papo UOL | Victor Aguiar 💜</title>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="/"><img src="./assets/logo-bp-uol.svg" alt="Logo bate papo UOL"></a>
+      <a href="#"><img src="./assets/people-icon.svg" alt="People icon"></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="messages">
+
+      <div class="message --status">
+        <p>
+          <span class="time">(09:21:45)</span>
+          <span class="who"><strong>João</strong></span>
+          entra na sala
+        </p>
+      </div>
+
+      <div class="message">
+        <p>
+          <span class="time">(09:22:28)</span>
+          <span class="who"><strong>João</strong> para <strong>Todos:</strong></span>
+          Bom dia
+        </p>
+      </div>
+
+      <div class="message">
+        <p>
+          <span class="time">(09:22:38)</span>
+          <span class="who"><strong>Maria</strong> para <strong>João:</strong></span>
+          Oi Jão :3
+        </p>
+      </div>
+
+      <div class="message --private">
+        <p>
+          <span class="time">(09:22:48)</span>
+          <span class="who"><strong>João</strong> reservadamente para <strong> Maria:</strong></span>
+          Oi gatinha quer tc?
+        </p>
+      </div>
+
+      <div class="message --status">
+        <p>
+          <span class="time">(09:22:58)</span>
+          <span class="who"><strong>Maria</strong></span>
+          sai da sala...
+        </p>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <label for="message" class="--sr-only">Message input field</label>
+    <!-- <input id="message" type="text" placeholder="Escreva aqui..."> -->
+    <textarea name="message" id="message" placeholder="Escreva aqui..."></textarea>
+    <button type="submit" for="message">
+      <img src="./assets/plane-icon.svg" alt="Submit message icon">
+    </button>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./scripts/script.js"></script>
+</body>
+
+</html>

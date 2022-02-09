@@ -1,0 +1,153 @@
+﻿/* Global Styles */
+
+* {
+  box-sizing: border-box;
+
+  /* Colors */
+  --bg-grey: #DCDCDC;
+  --bg-red: #FFDEDE;
+  --bg-color: #F3F3F3;
+  --text-grey: #AAAAAA;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+body {
+  background-color: var(--bg-color);
+
+  width: 100vw;
+
+}
+
+strong {
+  font-weight: 700;
+}
+
+/* Header Styles */
+
+header {
+  background-color: #fff;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  padding: 0 22px;
+
+  height: 80px;
+
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+header nav {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Main Content  */
+
+main {
+  width: 100%;
+  margin: 106px 0 80px;
+}
+
+/* Messages section */
+
+.message {
+  background-color: #fff;
+
+  border-radius: 2px;
+
+  padding: 10px 8px;
+  margin-bottom: 8px;
+
+  min-height: 40px;
+  line-height: 20px;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.message.--status {
+  background-color: var(--bg-grey);
+}
+
+.message.--private {
+  background-color: var(--bg-red);
+}
+
+.message .time {
+  color: var(--text-grey);
+  margin-right: 8px;
+}
+
+.message .who {
+  margin-right: 8px;
+}
+
+/* Footer Styles */
+
+footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 80px;
+
+  padding: 0 18px;
+
+  background-color: #fff;
+  box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+}
+
+footer textarea {
+  outline: none;
+  border: none;
+  resize: none;
+
+  max-height: 60px;
+  width: 100%;
+
+  padding-top: 20px;
+
+  font-size: 18px;
+  line-height: 21px;
+}
+
+footer textarea::placeholder {
+  font-style: italic;
+  color: #000;
+}
+
+footer button {
+  background-color: #fff;
+
+  border: none;
+}
+
+/* Screen readers */
+.--sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
