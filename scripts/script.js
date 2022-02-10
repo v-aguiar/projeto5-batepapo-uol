@@ -61,7 +61,7 @@ const chat = {
   },
 
   sendMessage() {
-    return 'eh nois'
+
   }
 }
 

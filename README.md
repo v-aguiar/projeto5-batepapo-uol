@@ -35,7 +35,7 @@
     - [x]  Após inserção do nome, este deve ser enviado para o servidor pra cadastrar o usuário
         - Caso o servidor responda com sucesso, o usuário poderá entrar na sala
         - Caso o servidor responda com erro, deve-se pedir para o usuário digitar outro nome, pois este já está em uso
-    - [ ]  Enquanto o usuário estiver na sala, a cada 5 segundos o site deve avisar ao servidor que o usuário ainda está presente, ou senão será considerado que "Saiu da sala"
+    - [x]  Enquanto o usuário estiver na sala, a cada 5 segundos o site deve avisar ao servidor que o usuário ainda está presente, ou senão será considerado que "Saiu da sala"
 - Envio de mensagem
     - [ ]  Ao enviar uma mensagem, esta deve ser enviada para o servidor
         - Caso o servidor responda com sucesso, você deve obter novamente as mensagens do servidor e atualizar o chat
