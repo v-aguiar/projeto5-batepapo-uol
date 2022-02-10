@@ -7,16 +7,16 @@
     - [x]  Seu projeto deverá ser desenvolvido utilizando Git e GitHub, em um repositório público
     - [ ]  **A cada requisito implementado** faça um *commit* com uma mensagem descritiva do que você evoluiu
 - Layout
-    - [ ]  Aplicar layout para mobile, seguindo Figma abaixo. Não é necessário implementar uma versão para desktop.
+    - [x]  Aplicar layout para mobile, seguindo Figma abaixo. Não é necessário implementar uma versão para desktop.
     
 - Chat
-    - [ ]  Ao entrar no site, este deve carregar as mensagens do servidor e exibi-las conforme layout fornecido
-    - [ ]  Existem 3 tipos de mensagem:
+    - [x]  Ao entrar no site, este deve carregar as mensagens do servidor e exibi-las conforme layout fornecido
+    - [x]  Existem 3 tipos de mensagem:
         - Mensagens de status (**Entrou** ou **Saiu** da sala): deve ter o fundo cinza
         - Mensagens reservadas (**Reservadamente**): deve ter o fundo rosa
         - Mensagens normais: devem ter o fundo branco
     - [ ]  A cada 3 segundos o site deve recarregar as mensagens do servidor para manter sempre atualizado
-    - [ ]  O chat deverá ter rolagem automática por padrão, ou seja, sempre que novas mensagens forem adicionadas ao final do chat ele deve scrollar para o final
+    - [x]  O chat deverá ter rolagem automática por padrão, ou seja, sempre que novas mensagens forem adicionadas ao final do chat ele deve scrollar para o final
         
         **Dica**: Você pode fazer com que um elemento apareça na tela utilizando a função `scrollIntoView`:
         

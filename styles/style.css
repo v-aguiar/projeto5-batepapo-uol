@@ -81,7 +81,7 @@ main {
   background-color: var(--bg-grey);
 }
 
-.message.--private {
+.message.--private_message {
   background-color: var(--bg-red);
 }
 
