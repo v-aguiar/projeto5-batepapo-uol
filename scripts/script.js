@@ -1,8 +1,10 @@
 ﻿const enterRoom = {
+  username: '',
   stayLoggedInterval: 0,
 
   sendUserName() {
     const name = prompt("Qual o seu lindo nome?")
+    enterRoom.username = name
 
     const request = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", {name: name})
     request.then(this.keepUserLoggedIn)
@@ -17,14 +19,14 @@
 
   keepUserLoggedIn(response) {
 
-    // console.log(response)
+    console.log(response)
 
-    // this.stayLoggedInterval = setInterval(() => {
-    //   const req = axios.post("https://mock-api.driven.com.br/api/v4/uol/status", {name: this.name})
-    //   req.then((response) => {
-    //     console.log("still logged")
-    //   })
-    // }, 4500)
+    this.stayLoggedInterval = setInterval(() => {
+      const request = axios.post("https://mock-api.driven.com.br/api/v4/uol/status", {name: enterRoom.username})
+      request.then((response) => {
+        console.log("still logged")
+      })
+    }, 4500)
   }
 }
 
@@ -36,9 +38,6 @@ const chat = {
 
   populateChat(response) {
     response.data.forEach((message) => {
-
-      console.log(message)
-
       const ifPrivateMessage = message.type === 'private_message' ? 'reservadamente' : ''
       const ifPublicMessage = message.type === 'message' ? `${ifPrivateMessage} para <strong> ${message.to}:</strong>` : ''
 
@@ -59,10 +58,14 @@ const chat = {
       messageDiv.scrollIntoView()
     })
 
+  },
+
+  sendMessage() {
+    return 'eh nois'
   }
 }
 
 // Declarations
 
-chat.getMessages()
+setInterval(() => {chat.getMessages()}, 3000)
 enterRoom.sendUserName()
