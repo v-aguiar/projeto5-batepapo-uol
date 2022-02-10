@@ -31,8 +31,8 @@
         - Obs: Fazer essa filtragem no front-end não é uma boa prática, o ideal seria o servidor não fornecer essas mensagens para outras pessoas. Manteremos dessa forma por fins didáticos :)
     
 - Entrada na sala
-    - [ ]  Ao entrar no site, o usuário deverá ser perguntado com um `prompt` ****seu lindo nome
-    - [ ]  Após inserção do nome, este deve ser enviado para o servidor pra cadastrar o usuário
+    - [x]  Ao entrar no site, o usuário deverá ser perguntado com um `prompt` ****seu lindo nome
+    - [x]  Após inserção do nome, este deve ser enviado para o servidor pra cadastrar o usuário
         - Caso o servidor responda com sucesso, o usuário poderá entrar na sala
         - Caso o servidor responda com erro, deve-se pedir para o usuário digitar outro nome, pois este já está em uso
     - [ ]  Enquanto o usuário estiver na sala, a cada 5 segundos o site deve avisar ao servidor que o usuário ainda está presente, ou senão será considerado que "Saiu da sala"
