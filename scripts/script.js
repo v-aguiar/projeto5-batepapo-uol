@@ -1,11 +1,13 @@
-﻿let username = '';
+﻿let USERNAME = ''
+let VISIBILITY = 'message'
+let RECEIVER = 'Todos'
 
 const user = {
   stayLoggedInterval: 0,
 
   sendUserName() {
     const name = prompt("Qual o seu lindo nome?")
-    username = name
+    USERNAME = name
 
     const request = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", {name: name})
     request.then(this.keepUserLoggedIn)
@@ -20,7 +22,7 @@ const user = {
 
   keepUserLoggedIn(response) {
     this.stayLoggedInterval = setInterval(() => {
-      const request = axios.post("https://mock-api.driven.com.br/api/v4/uol/status", {name: username})
+      const request = axios.post("https://mock-api.driven.com.br/api/v4/uol/status", {name: USERNAME})
       request.then(() => {
         console.log("still logged")
       })
@@ -29,7 +31,7 @@ const user = {
 
   getAllLoggedInUsers() {
     const request = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants")
-    // request.then(user.isUserInRoom)
+    request.then(sidebar.displayUsernames)
   }
 }
 
@@ -49,7 +51,7 @@ const chat = {
       const messageDiv = document.createElement('div')
 
       if(message.type === 'private_message') {
-        if((username === message.from) || (username === message.to)) {
+        if((USERNAME === message.from) || (USERNAME === message.to)) {
           messageDiv.classList.add("message", `--${message.type}`)
           messageDiv.innerHTML = messageStructure
           messagesContainer.appendChild(messageDiv)
@@ -57,6 +59,7 @@ const chat = {
         }
       } else {
         messageDiv.classList.add("message", `--${message.type}`)
+        messageDiv.setAttribute("data-identifier", "message")
         messageDiv.innerHTML = messageStructure
         messagesContainer.appendChild(messageDiv)
         messageDiv.scrollIntoView()
@@ -66,7 +69,7 @@ const chat = {
 
   buildMessageStructure(message) {
     const ifPrivateMessage = message.type === 'private_message' ? 'reservadamente' : ''
-    const ifPublicMessage = message.type === 'message' ? `${ifPrivateMessage} para <strong> ${message.to}:</strong>` : ''
+    const ifPublicMessage = (message.type === 'message' || message.type === 'private_message') ? `${ifPrivateMessage} para <strong> ${message.to}:</strong>` : ''
 
     const structure = `
         <p>
@@ -83,20 +86,129 @@ const chat = {
     const text = document.querySelector("footer textarea")
 
     const messageData = {
-      from: username,
-      to: "Todos",
+      from: USERNAME,
+      to: RECEIVER,
       text: `${text.value}`,
-      type: "message"
+      type: VISIBILITY
     }
+
+    console.log(messageData)
+
     const validateSentMessage = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", messageData)
 
     text.value = ''
 
     validateSentMessage.then(chat.getMessages)
-    validateSentMessage.catch(() => {window.location.reload()})
+    // validateSentMessage.catch(() => {window.location.reload()})
   }
 }
 
+const modal = {
+  modalElement: document.querySelector(".modal"),
+
+  openModal() {
+    user.getAllLoggedInUsers()
+    setInterval(() => {user.getAllLoggedInUsers()}, 10000)
+
+    this.modalElement.classList.remove("--hidden")
+
+    this.modalElement.querySelector(".modal__clickable-area").addEventListener("click", () => {
+      this.closeModal()
+    })
+  },
+
+  closeModal() {
+    this.modalElement.classList.add("--hidden")
+  }
+}
+
+const sidebar = {
+  selectLine(clickedLine) {
+    const usersLines = document.querySelectorAll(".sidebar__onlineUsers li")
+    const visibilityLines = document.querySelectorAll(".sidebar__visibility li")
+
+    let isVisibilityLine = false
+
+    visibilityLines.forEach((visibilityLine) => {
+      (visibilityLine === clickedLine) ? isVisibilityLine = true : false
+    })
+
+    if(!isVisibilityLine) {
+      usersLines.forEach((userLine) => {
+        const areUsersTheSame = (userLine === clickedLine)
+        const isCheckmarkHidden = (userLine.querySelector(".sidebar__checkmark").classList.contains("--hidden"))
+
+        if(!areUsersTheSame && !isCheckmarkHidden) {
+          userLine.style.justifyContent = "initial"
+          userLine.querySelector(".sidebar__checkmark").classList.add("--hidden")
+        } else if(areUsersTheSame && isCheckmarkHidden) {
+          clickedLine.style.justifyContent = "space-between"
+          clickedLine.querySelector(".sidebar__checkmark").classList.remove("--hidden")
+
+          sidebar.getReceiver(clickedLine)
+        }
+      })
+    } else {
+      visibilityLines.forEach((visibilityLine) => {
+        const areTypesTheSame = (visibilityLine === clickedLine)
+        const isCheckmarkHidden = (visibilityLine.querySelector(".sidebar__checkmark").classList.contains("--hidden"))
+
+        if(!areTypesTheSame && !isCheckmarkHidden) {
+          visibilityLine.style.justifyContent = "initial"
+          visibilityLine.querySelector(".sidebar__checkmark").classList.add("--hidden")
+
+        } else if(areTypesTheSame && isCheckmarkHidden) {
+          clickedLine.style.justifyContent = "space-between"
+          clickedLine.querySelector(".sidebar__checkmark").classList.remove("--hidden")
+
+          sidebar.getVisibility(clickedLine)
+        }
+      })
+    }
+  },
+
+  getReceiver(clickedLine) {
+    const receiver = clickedLine.querySelector("p").innerText
+
+    RECEIVER = receiver
+  },
+
+  getVisibility(clickedLine) {
+    const visibility = clickedLine.querySelector("p").innerText
+
+    if(visibility === "Privado") {
+      VISIBILITY = "private_message"
+    } else if(visibility === "Público") {
+      VISIBILITY = "message"
+    }
+  },
+
+  displayUsernames(response) {
+    const linesContainer = document.querySelector(".sidebar__onlineUsers ul")
+
+    linesContainer.innerHTML = ''
+
+    response.data.forEach((name) => {
+      setInterval(sidebar.buildSidebarLineStructure(name.name), 1000)
+    })
+  },
+
+  buildSidebarLineStructure(name) {
+    const linesContainer = document.querySelector(".sidebar__onlineUsers ul")
+
+    const lineStructure = `
+    <li onclick="sidebar.selectLine(this)" class="sidebar__line" data-identifier="participant">
+      <span>
+        <img class="sidebar__icon" src="./assets/person-icon.svg" alt="person icon">
+        <p>${name}</p>
+      </span>
+      <img class="sidebar__checkmark --hidden" src="./assets/checkmark-icon.svg" alt="Check icon">
+    </li>
+    `
+
+    linesContainer.innerHTML += lineStructure
+  }
+}
 // Declarations
 
 setInterval(() => {chat.getMessages()}, 3000)

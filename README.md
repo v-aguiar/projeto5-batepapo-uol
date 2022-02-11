@@ -27,7 +27,7 @@
         
         Se `elementoQueQueroQueApareca` estiver dentro de um elemento scrollável, o elemento será scrollado para que o `elementoQueQueroQueApareca` fique visível.
         
-    - [ ]  As mensagens com **Reservadamente** só devem ser exibidas se o nome do destinatário for igual ao nome do usuário que está usando o chat (ou senão ele poderia ver as mensagens reservadas para outras pessoas)
+    - [x]  As mensagens com **Reservadamente** só devem ser exibidas se o nome do destinatário for igual ao nome do usuário que está usando o chat (ou senão ele poderia ver as mensagens reservadas para outras pessoas)
         - Obs: Fazer essa filtragem no front-end não é uma boa prática, o ideal seria o servidor não fornecer essas mensagens para outras pessoas. Manteremos dessa forma por fins didáticos :)
     
 - Entrada na sala
@@ -37,20 +37,20 @@
         - Caso o servidor responda com erro, deve-se pedir para o usuário digitar outro nome, pois este já está em uso
     - [x]  Enquanto o usuário estiver na sala, a cada 5 segundos o site deve avisar ao servidor que o usuário ainda está presente, ou senão será considerado que "Saiu da sala"
 - Envio de mensagem
-    - [ ]  Ao enviar uma mensagem, esta deve ser enviada para o servidor
+    - [x]  Ao enviar uma mensagem, esta deve ser enviada para o servidor
         - Caso o servidor responda com sucesso, você deve obter novamente as mensagens do servidor e atualizar o chat
         - Caso o servidor responda com erro, significa que esse usuário não está mais na sala e a página deve ser atualizada (e com isso voltando pra etapa de pedir o nome)
             
             **Dica**: experimente usar `window.location.reload()`
             
-    - [ ]  Nesse envio, deve ser informado o remetente, o destinatário e se a mensagem é reservada ou não.
+    - [x]  Nesse envio, deve ser informado o remetente, o destinatário e se a mensagem é reservada ou não.
         - Escolher um destinário e se a mensagem é reservada ou pública é um **requisito bônus** (ver abaixo). Logo, se você não implementar o bônus, sempre envie destinatário como **Todos** e a mensagem como **pública**.
 - **Para facilitar a correção do projeto (correção automágica)** 🙂
     
     Para agilizarmos a correção dos projetos e dar um feedback mais rápido para vocês, adicione o que está sendo pedido abaixo nos seus elementos:
     
-    - Nos elementos que representam mensagens, adicione o atributo `data-identifier="message"`
-    - No botão de enviar uma mensagem, adicione o atributo `data-identifier="send-message"`
+    - [x] Nos elementos que representam mensagens, adicione o atributo `data-identifier="message"`
+    - [x] No botão de enviar uma mensagem, adicione o atributo `data-identifier="send-message"`
     
     Com as configurações acima conseguimos automatizar parte da correção do projeto, acelerando o feedback.
     
@@ -58,17 +58,17 @@
 ## Bônus (opcional)
 
 - Participantes ativos
-    - [ ]  Ao clicar no ícone superior direito de participantes, o menu lateral deve abrir por cima do chat conforme layout. Um fundo escuro semi-transparente deve ficar por cima do chat.
-    - [ ]  Ao clicar no fundo escuro, o menu lateral deve ser ocultado novamente
+    - [x]  Ao clicar no ícone superior direito de participantes, o menu lateral deve abrir por cima do chat conforme layout. Um fundo escuro semi-transparente deve ficar por cima do chat.
+    - [x]  Ao clicar no fundo escuro, o menu lateral deve ser ocultado novamente
     - [ ]  O site deve obter a lista de participantes assim que entra no chat e deve atualizar a lista a cada 10 segundos
-    - [ ]  Ao clicar em uma pessoa ou em público/reservadamente, a opção clicada deve ser marcada com um check e as demais desmarcadas
+    - [x]  Ao clicar em uma pessoa ou em público/reservadamente, a opção clicada deve ser marcada com um check e as demais desmarcadas
     - [ ]  Além do check acima, ao trocar esses parâmetros também deve ser alterada a frase que informa o destinatário, que fica embaixo do input de mensagem
-    - **Para facilitar a correção do projeto** 🙂
+    - [x] **Para facilitar a correção do projeto** 🙂
         
         Para agilizarmos a correção dos projetos e dar um feedback mais rápido para vocês, adicione o que está sendo pedido abaixo nos seus elementos:
         
-        - Nos elementos que representam um participante, adicione o atributo `data-identifier="participant"`
-        - Nos elementos que identificam a visibilidade, adicione o atributo `data-identifier="visibility"`
+        - [x] Nos elementos que representam um participante, adicione o atributo `data-identifier="participant"`
+        - [x] Nos elementos que identificam a visibilidade, adicione o atributo `data-identifier="visibility"`
         
         Com as configurações acima conseguimos automatizar parte da correção do projeto, acelerando o feedback.
         

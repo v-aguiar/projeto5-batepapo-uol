@@ -27,6 +27,10 @@ strong {
   font-weight: 700;
 }
 
+.--hidden {
+  display: none;
+}
+
 /* Header Styles */
 
 header {
@@ -94,6 +98,103 @@ main {
 
 .message .who {
   margin-right: 8px;
+}
+
+/* Sidebar Styles */
+
+.modal {
+  z-index: 2;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 100%;
+
+}
+
+.modal__clickable-area {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  width: calc(100vw - 259px);
+
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 259px;
+
+  font-size: 16px;
+
+  background-color: #fff;
+
+  overflow-y: scroll;
+
+  /* IE */
+  -ms-overflow-style: none;
+  /* Firefox */
+  scrollbar-width: none;
+}
+
+/* Safari and Chrome */
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar__title {
+  font-weight: 700;
+  text-align: center;
+
+  margin: 35px 0;
+  padding: 0 10px;
+}
+
+.sidebar__onlineUsers,
+.sidebar__visibility {
+  font-weight: 400;
+
+  padding: 0 20px;
+}
+
+.sidebar__line {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin: 15px 0;
+}
+
+.sidebar__line span {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.sidebar__line span:hover {
+  cursor: pointer;
+}
+
+.sidebar__onlineUsers .sidebar__icon {
+  width: 22px;
+}
+
+.sidebar__visibility .sidebar__icon {
+  width: 18px;
+}
+
+.sidebar__checkmark {
+  width: 14px;
 }
 
 /* Footer Styles */
