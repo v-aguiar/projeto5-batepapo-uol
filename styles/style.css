@@ -27,7 +27,7 @@ strong {
 }
 
 .--hidden {
-  display: none;
+  display: none !important;
 }
 
 /* Header Styles */
@@ -59,10 +59,72 @@ header nav {
 
 main {
   width: 100%;
-  margin: 106px 0 80px;
+  margin: 106px 0 90px;
 }
 
-/* Messages section */
+
+/* Login Page Section*/
+
+.login-page {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+
+  background-color: #fff;
+
+  margin-top: -50px;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.login-page img {
+  width: 130px;
+
+  margin-bottom: 94px;
+
+  border: none;
+}
+
+.login-page input {
+  width: 69.6%;
+  height: 54px;
+
+  padding: 6px 12px;
+  margin-bottom: 15px;
+
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+
+  border-radius: 4px;
+  border-color: #D7D7D7;
+  outline: none;
+}
+
+.login-page input::placeholder {
+  color: #AEAEAE;
+}
+
+.login-page button {
+  width: 29.09%;
+  height: 45px;
+
+  color: #696969;
+  font-size: 18px;
+
+  background-color: #E7E7E7;
+  border-radius: 9px;
+  border: none;
+}
+
+/* Messages Section */
 
 .message {
   background-color: #fff;
@@ -110,7 +172,6 @@ main {
   right: 0;
 
   height: 100%;
-
 }
 
 .modal__clickable-area {
@@ -137,16 +198,6 @@ main {
   background-color: #fff;
 
   overflow-y: scroll;
-
-  /* IE */
-  -ms-overflow-style: none;
-  /* Firefox */
-  scrollbar-width: none;
-}
-
-/* Safari and Chrome */
-.sidebar::-webkit-scrollbar {
-  display: none;
 }
 
 .sidebar__title {
@@ -208,7 +259,7 @@ footer {
   align-items: center;
   justify-content: space-between;
 
-  height: 80px;
+  height: 90px;
 
   padding: 0 18px;
 
@@ -225,18 +276,16 @@ footer .input-description textarea {
   border: none;
   resize: none;
 
-  max-height: 60px;
+  padding-top: 10px;
+  max-height: 46px;
   width: 100%;
 
-  padding-top: 20px;
-
   font-size: 18px;
-  line-height: 21px;
 }
 
 footer .input-description textarea::placeholder {
-  font-style: italic;
   color: #000;
+  font-style: italic;
 }
 
 footer .input-description p {

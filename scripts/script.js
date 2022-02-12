@@ -6,7 +6,7 @@ const user = {
   stayLoggedInterval: 0,
 
   sendUserName() {
-    const name = prompt("Qual o seu lindo nome?")
+    const name = this.getUserName()
     USERNAME = name
 
     const request = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", {name: name})
@@ -14,13 +14,17 @@ const user = {
     request.catch(this.userAlreadyLoggedIn)
   },
 
+  getUserName() {
+    return document.querySelector("#login-page__input").value
+  },
+
   userAlreadyLoggedIn(error) {
     alert("User already logged in, please enter different name!")
-
-    this.sendUserName()
   },
 
   keepUserLoggedIn(response) {
+    user.closeLoginPage()
+
     this.stayLoggedInterval = setInterval(() => {
       const request = axios.post("https://mock-api.driven.com.br/api/v4/uol/status", {name: USERNAME})
       request.then(() => {
@@ -32,6 +36,12 @@ const user = {
   getAllLoggedInUsers() {
     const request = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants")
     request.then(sidebar.displayUsernames)
+  },
+
+  closeLoginPage() {
+    const loginPageSection = document.querySelector(".login-page")
+
+    loginPageSection.classList.add("--hidden")
   }
 }
 
@@ -99,7 +109,7 @@ const chat = {
     text.value = ''
 
     validateSentMessage.then(chat.getMessages)
-    // validateSentMessage.catch(() => {window.location.reload()})
+    validateSentMessage.catch(() => {window.location.reload()})
   }
 }
 
@@ -234,4 +244,3 @@ const sidebar = {
 // Declarations
 
 setInterval(() => {chat.getMessages()}, 3000)
-user.sendUserName()
