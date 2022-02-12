@@ -60,9 +60,9 @@
 - Participantes ativos
     - [x]  Ao clicar no ícone superior direito de participantes, o menu lateral deve abrir por cima do chat conforme layout. Um fundo escuro semi-transparente deve ficar por cima do chat.
     - [x]  Ao clicar no fundo escuro, o menu lateral deve ser ocultado novamente
-    - [ ]  O site deve obter a lista de participantes assim que entra no chat e deve atualizar a lista a cada 10 segundos
+    - [x]  O site deve obter a lista de participantes assim que entra no chat e deve atualizar a lista a cada 10 segundos
     - [x]  Ao clicar em uma pessoa ou em público/reservadamente, a opção clicada deve ser marcada com um check e as demais desmarcadas
-    - [ ]  Além do check acima, ao trocar esses parâmetros também deve ser alterada a frase que informa o destinatário, que fica embaixo do input de mensagem
+    - [x]  Além do check acima, ao trocar esses parâmetros também deve ser alterada a frase que informa o destinatário, que fica embaixo do input de mensagem
     - [x] **Para facilitar a correção do projeto** 🙂
         
         Para agilizarmos a correção dos projetos e dar um feedback mais rápido para vocês, adicione o que está sendo pedido abaixo nos seus elementos:

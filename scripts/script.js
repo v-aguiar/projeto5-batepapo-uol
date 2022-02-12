@@ -171,6 +171,7 @@ const sidebar = {
     const receiver = clickedLine.querySelector("p").innerText
 
     RECEIVER = receiver
+    sidebar.changeInputReceiver()
   },
 
   getVisibility(clickedLine) {
@@ -181,12 +182,33 @@ const sidebar = {
     } else if(visibility === "Público") {
       VISIBILITY = "message"
     }
+
+    sidebar.changeInputReceiver()
+  },
+
+  changeInputReceiver() {
+    const inputReceiver = document.querySelector(".input-description p")
+
+    console.log(inputReceiver)
+
+    const isMessagePrivate = (VISIBILITY === "private_message") ? `${RECEIVER} (reservadamemte)` : `${RECEIVER}`
+    const message = `Enviando para ${isMessagePrivate}`
+
+    inputReceiver.innerText = message
   },
 
   displayUsernames(response) {
     const linesContainer = document.querySelector(".sidebar__onlineUsers ul")
 
-    linesContainer.innerHTML = ''
+    linesContainer.innerHTML = `
+      <li onclick="sidebar.selectLine(this)" class="sidebar__line">
+        <span>
+          <img class="sidebar__icon" src="./assets/people-icon.svg" alt="People icon">
+          <p>Todos</p>
+        </span>
+        <img class="sidebar__checkmark --hidden" src="./assets/checkmark-icon.svg" alt="Check icon">
+      </li>
+    `
 
     response.data.forEach((name) => {
       setInterval(sidebar.buildSidebarLineStructure(name.name), 1000)

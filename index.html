@@ -21,7 +21,7 @@
 <body>
   <header>
     <nav>
-      <a href="/"><img src="./assets/logo-bp-uol.svg" alt="Logo bate papo UOL"></a>
+      <a href="/projeto5-batepapo-uol"><img src="./assets/logo-bp-uol.svg" alt="Logo bate papo UOL"></a>
       <a href="#" onclick="modal.openModal()"><img src="./assets/people-icon.svg" alt="People icon"></a>
     </nav>
   </header>
@@ -70,8 +70,11 @@
   </main>
 
   <footer>
-    <label for="message" class="--sr-only">Message input field</label>
-    <textarea name="message" id="message" placeholder="Escreva aqui..."></textarea>
+    <span class="input-description">
+      <label for="message" class="--sr-only">Message input field</label>
+      <textarea name="message" id="message" placeholder="Escreva aqui..."></textarea>
+      <p>Enviando para todos</p>
+    </span>
     <button data-identifier="send-message" type="submit" for="message" onclick="chat.sendMessage()">
       <img src="./assets/plane-icon.svg" alt="Submit message icon">
     </button>
