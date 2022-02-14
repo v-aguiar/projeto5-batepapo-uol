@@ -19,7 +19,7 @@ html {
 body {
   background-color: var(--bg-color);
 
-  width: 100%;
+  max-width: 614px;
 }
 
 strong {
@@ -92,6 +92,13 @@ main {
   border: none;
 }
 
+.login-page form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .login-page input {
   width: 69.6%;
   height: 54px;
@@ -112,7 +119,7 @@ main {
   color: #AEAEAE;
 }
 
-.login-page button {
+.login-page .btn {
   width: 29.09%;
   height: 45px;
 
@@ -123,6 +130,81 @@ main {
   border-radius: 9px;
   border: none;
 }
+
+/* Loading Page -> Modified from original loading template found at:   */
+
+.loading-page {
+  position: relative
+}
+
+.loading-text {
+  position: relative;
+  left: calc(50% - 37px);
+  top: 100px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.centered {
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  filter: blur(1px) contrast(20);
+}
+
+.blob-1, .blob-2 {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.blob-1 {
+  left: 20%;
+  animation: osc-l 2.5s ease infinite;
+  background: #a04815;
+}
+
+.blob-2 {
+  left: 80%;
+  animation: osc-r 2.5s ease infinite;
+  background: #f3e178;
+}
+
+@keyframes osc-l {
+  0% {
+    left: 20%;
+  }
+
+  50% {
+    left: 50%;
+  }
+
+  100% {
+    left: 20%;
+  }
+}
+
+@keyframes osc-r {
+  0% {
+    left: 80%;
+  }
+
+  50% {
+    left: 50%;
+  }
+
+  100% {
+    left: 80%;
+  }
+}
+
 
 /* Messages Section */
 

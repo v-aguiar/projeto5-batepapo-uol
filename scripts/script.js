@@ -1,17 +1,31 @@
-﻿let USERNAME = ''
+﻿// Global variables
+
+let USERNAME = ''
 let VISIBILITY = 'message'
 let RECEIVER = 'Todos'
+
+// Functions
 
 const user = {
   stayLoggedInterval: 0,
 
-  sendUserName() {
-    const name = this.getUserName()
+  listenUserLogin() {
+    const loginForm = document.querySelector(".login-page form")
+
+    loginForm.addEventListener("submit", user.sendUserName)
+  },
+
+  sendUserName(event) {
+    loadingEvent.toogleDisplayLoadingPage()
+
+    const name = event.target[0].value
     USERNAME = name
 
-    const request = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", {name: name})
-    request.then(this.keepUserLoggedIn)
-    request.catch(this.userAlreadyLoggedIn)
+    const request = axios.post("https://mock-api.driven.com.br/api/v4/uol/participants", {name: USERNAME})
+    request.then(user.keepUserLoggedIn)
+    request.catch(user.userAlreadyLoggedIn)
+
+    event.preventDefault()
   },
 
   getUserName() {
@@ -23,13 +37,13 @@ const user = {
   },
 
   keepUserLoggedIn(response) {
+    loadingEvent.toogleDisplayLoadingPage()
+    chat.listenMessageInputClick()
     user.closeLoginPage()
 
-    this.stayLoggedInterval = setInterval(() => {
+    user.stayLoggedInterval = setInterval(() => {
       const request = axios.post("https://mock-api.driven.com.br/api/v4/uol/status", {name: USERNAME})
-      request.then(() => {
-        console.log("still logged")
-      })
+      request.then(() => {})
     }, 4500)
   },
 
@@ -42,6 +56,25 @@ const user = {
     const loginPageSection = document.querySelector(".login-page")
 
     loginPageSection.classList.add("--hidden")
+  }
+}
+
+const loadingEvent = {
+  toogleDisplayLoadingPage() {
+    const loadingSection = document.querySelector(".loading-page")
+    const loginForm = document.querySelector(".login-page form")
+
+    if(!loginForm.classList.contains("--hidden")) {
+      loginForm.classList.add("--hidden")
+    } else {
+      loginForm.classList.remove("--hidden")
+    }
+
+    if(!loadingSection.classList.contains("--hidden")) {
+      loadingSection.classList.add("--hidden")
+    } else {
+      loadingSection.classList.remove("--hidden")
+    }
   }
 }
 
@@ -92,13 +125,31 @@ const chat = {
     return structure
   },
 
+  listenMessageInputClick() {
+    const messageInputField = document.getElementById("message")
+    messageInputField.addEventListener("click", chat.listenEnterKey)
+  },
+
+  listenEnterKey() {
+    const messageField = document.querySelector("#message")
+    const sendMessageButton = document.querySelector("footer button")
+
+    messageField.addEventListener("keyup", (event) => {
+      if(event.keyCode === 13) {
+        event.preventDefault()
+
+        sendMessageButton.click()
+      }
+    })
+  },
+
   sendMessage() {
-    const text = document.querySelector("footer textarea")
+    const text = document.querySelector("#message").value
 
     const messageData = {
       from: USERNAME,
       to: RECEIVER,
-      text: `${text.value}`,
+      text: text,
       type: VISIBILITY
     }
 
@@ -106,7 +157,7 @@ const chat = {
 
     const validateSentMessage = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", messageData)
 
-    text.value = ''
+    document.querySelector("#message").value = ''
 
     validateSentMessage.then(chat.getMessages)
     validateSentMessage.catch(() => {window.location.reload()})
@@ -193,13 +244,13 @@ const sidebar = {
       VISIBILITY = "message"
     }
 
+    console.log(VISIBILITY)
+
     sidebar.changeInputReceiver()
   },
 
   changeInputReceiver() {
     const inputReceiver = document.querySelector(".input-description p")
-
-    console.log(inputReceiver)
 
     const isMessagePrivate = (VISIBILITY === "private_message") ? `${RECEIVER} (reservadamemte)` : `${RECEIVER}`
     const message = `Enviando para ${isMessagePrivate}`
@@ -241,6 +292,9 @@ const sidebar = {
     linesContainer.innerHTML += lineStructure
   }
 }
+
 // Declarations
+
+user.listenUserLogin()
 
 setInterval(() => {chat.getMessages()}, 3000)
