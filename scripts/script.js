@@ -3,6 +3,7 @@
 let USERNAME = ''
 let VISIBILITY = 'message'
 let RECEIVER = 'Todos'
+let MessageListener = ''
 
 // Functions
 
@@ -28,14 +29,6 @@ const user = {
     event.preventDefault()
   },
 
-  getUserName() {
-    return document.querySelector("#login-page__input").value
-  },
-
-  userAlreadyLoggedIn(error) {
-    alert("User already logged in, please enter different name!")
-  },
-
   keepUserLoggedIn(response) {
     loadingEvent.toogleDisplayLoadingPage()
     chat.listenMessageInputClick()
@@ -47,15 +40,24 @@ const user = {
     }, 4500)
   },
 
-  getAllLoggedInUsers() {
-    const request = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants")
-    request.then(sidebar.displayUsernames)
+  getUserName() {
+    return document.querySelector("#login-page__input").value
+  },
+
+  userAlreadyLoggedIn(error) {
+    alert("User already logged in, please enter different name!")
+    window.location.reload()
   },
 
   closeLoginPage() {
     const loginPageSection = document.querySelector(".login-page")
 
     loginPageSection.classList.add("--hidden")
+  },
+
+  getAllLoggedInUsers() {
+    const request = axios.get("https://mock-api.driven.com.br/api/v4/uol/participants")
+    request.then(sidebar.displayUsernames)
   }
 }
 
@@ -96,6 +98,7 @@ const chat = {
       if(message.type === 'private_message') {
         if((USERNAME === message.from) || (USERNAME === message.to)) {
           messageDiv.classList.add("message", `--${message.type}`)
+          messageDiv.setAttribute("data-identifier", "message")
           messageDiv.innerHTML = messageStructure
           messagesContainer.appendChild(messageDiv)
           messageDiv.scrollIntoView()
@@ -132,15 +135,21 @@ const chat = {
 
   listenEnterKey() {
     const messageField = document.querySelector("#message")
+
+    messageField.addEventListener("keyup", chat.sendOnKeyUp)
+  },
+
+  sendOnKeyUp(event) {
     const sendMessageButton = document.querySelector("footer button")
+    const messageField = document.querySelector("#message")
 
-    messageField.addEventListener("keyup", (event) => {
-      if(event.keyCode === 13) {
-        event.preventDefault()
+    if(event.keyCode === 13) {
+      event.preventDefault()
 
-        sendMessageButton.click()
-      }
-    })
+      sendMessageButton.click()
+      messageField.removeEventListener("keyup", chat.sendOnKeyUp)
+      chat.listenEnterKey()
+    }
   },
 
   sendMessage() {
@@ -154,13 +163,14 @@ const chat = {
     }
 
     console.log(messageData)
-
-    const validateSentMessage = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", messageData)
+    setTimeout(() => {
+      const validateSentMessage = axios.post("https://mock-api.driven.com.br/api/v4/uol/messages", messageData)
+      validateSentMessage.then(chat.getMessages)
+      validateSentMessage.catch(() => {window.location.reload()})
+    }, 1000)
 
     document.querySelector("#message").value = ''
 
-    validateSentMessage.then(chat.getMessages)
-    validateSentMessage.catch(() => {window.location.reload()})
   }
 }
 
